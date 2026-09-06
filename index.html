@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Crops — Интерактивная карта объектов в Польше</title>
+    <!-- Google Fonts: Outfit for titles, Inter for body text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for beautiful icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Panel -->
+        <aside class="sidebar" id="sidebar-panel">
+            <header class="sidebar-header">
+                <div class="logo-area">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <div>
+                        <h1>Green Crops</h1>
+                        <p class="subtitle">Agrotech & Farming Poland</p>
+                    </div>
+                </div>
+
+                <!-- Quick stats -->
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <span class="stat-num" id="stat-offices">2</span>
+                        <span class="stat-label">Офиса</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-num" id="stat-fields">2</span>
+                        <span class="stat-label">Поля</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-num" id="stat-area">205 га</span>
+                        <span class="stat-label">Площадь</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Search and Filters Section -->
+            <section class="controls-section">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="search-input" placeholder="Поиск объектов (город, культура)..."
+                        autocomplete="off">
+                    <button id="clear-search" class="clear-search-btn" title="Очистить поиск">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all" id="btn-filter-all">
+                        <i class="fa-solid fa-border-all"></i> Все
+                    </button>
+                    <button class="filter-btn" data-filter="office" id="btn-filter-offices">
+                        <i class="fa-solid fa-building"></i> Офисы
+                    </button>
+                    <button class="filter-btn" data-filter="field" id="btn-filter-fields">
+                        <i class="fa-solid fa-wheat-awn"></i> Поля
+                    </button>
+                </div>
+            </section>
+
+            <!-- Dynamic List of Objects -->
+            <section class="list-section">
+                <div class="list-header">
+                    <h2>Список объектов (<span id="items-count">0</span>)</h2>
+                </div>
+                <div class="objects-list" id="objects-list">
+                    <!-- Object cards will be generated dynamically by JavaScript -->
+                    <div class="loading-placeholder">
+                        <i class="fa-solid fa-circle-notch fa-spin"></i> Загрузка объектов...
+                    </div>
+                </div>
+            </section>
+
+            <footer class="sidebar-footer">
+                <p>&copy; 2026 Green Crops Sp. z o.o.</p>
+            </footer>
+        </aside>
+
+        <!-- Toggle sidebar button for mobile layout -->
+        <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle Sidebar">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <!-- Interactive Map Container -->
+        <main class="map-container">
+            <div id="map"></div>
+            <!-- Instruction overlay in case Google Maps fails to load or requires API key -->
+            <div id="map-fallback" class="map-fallback hidden">
+                <div class="fallback-card">
+                    <i class="fa-solid fa-map-location-dot fallback-icon"></i>
+                    <h2>Требуется API-ключ Google Maps</h2>
+                    <p>Пожалуйста, укажите ваш API-ключ Google Maps в файле <code>index.html</code>:</p>
+                    <pre><code>&lt;script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY..."&gt;</code></pre>
+                    <p class="small-text">Это сообщение скроется после инициализации карты.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Application Logic -->
+    <script src="app.js"></script>
+
+    <!-- Google Maps JavaScript API (Replace INSERT_YOUR_API_KEY with your real Google Maps API key) -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVjprl1XPe-clVWnmFYeo9xnLnWMh064M&callback=initMap&libraries=geometry"
+        defer></script>
+</body>
+
+</html>
